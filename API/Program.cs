@@ -14,6 +14,7 @@ config = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .AddEnvironmentVariables()
     .Build();
+builder.Services.AddCors();
 
 var connString = config.GetRequiredSection("ConnectionStrings").GetRequiredSection("DefaultConnection").Get<string>();
 builder.Services.AddDbContext<DataContext>(options => {
@@ -31,7 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseRouting();
+app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(new string[]{"https://localhost:4200"}));
 app.UseAuthorization();
 
 app.MapControllers();
