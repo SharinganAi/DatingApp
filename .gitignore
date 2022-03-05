@@ -457,3 +457,6 @@ $RECYCLE.BIN/
 //remove appsettings 
 appsettings.json
 datingapp.db
+
+//ssl folder
+ssl
